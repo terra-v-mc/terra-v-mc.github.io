@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraV</title>
+    <style>
+        a {
+            color: #000000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="./">< back</a>
+    <h1 id="title"></h1>
+    <a id="l1">manage reporters</a><br>
+    <a id="l2">write articles</a>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        document.getElementById("title").innerHTML = "newspaper " + id;
+        document.getElementById("l1").setAttribute("href", "./people/?id=" + id);
+        document.getElementById("l2").setAttribute("href", "./articles/?id=" + id);
+    </script>
+</body>
+</html>
