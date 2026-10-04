@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraV</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: #f5f5f5;
+            color: #222;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            margin-top: 28px;
+            font-size: 18px;
+        }
+
+        p {
+            line-height: 1.7;
+            color: #444;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .accept {
+            background: #222;
+            color: white;
+        }
+
+        .accept:hover {
+            background: #000;
+        }
+
+        .decline {
+            background: #e5e5e5;
+            color: #222;
+        }
+
+        .decline:hover {
+            background: #d5d5d5;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+        <h1>Disclaimer</h1>
+
+        <p>
+            Please read this disclaimer carefully before continuing to use this website.
+        </p>
+
+        <h2>Third-Party Content</h2>
+
+        <p>
+            Some of the content published on this website may be created, submitted,
+            or provided by third parties. Such content does not necessarily represent
+            the views, opinions, or positions of Terra V or its operator.
+        </p>
+
+        <h2>No Liability</h2>
+
+        <p>
+            Terra V and its operator do not assume any responsibility or liability for
+            the accuracy, completeness, reliability, legality, or timeliness of
+            third-party content published on this website.
+        </p>
+
+        <p>
+            The respective authors or contributors are solely responsible for the
+            content they create or submit. Terra V does not guarantee that such content
+            is free from errors, omissions, copyright violations, or other legal issues.
+        </p>
+
+        <h2>External Links</h2>
+
+        <p>
+            This website may contain links to websites or services operated by third
+            parties. Terra V has no control over the content, availability, or policies
+            of external websites and assumes no responsibility for them.
+        </p>
+
+        <h2>Acceptance</h2>
+
+        <p>
+            By clicking <strong>"Accept"</strong>, you acknowledge that you have read
+            and understood this disclaimer and agree to continue using the website
+            subject to these terms.
+        </p>
+
+        <div class="buttons">
+            <button class="accept" onclick="acceptDisclaimer()">
+                Accept
+            </button>
+
+            <button class="decline" onclick="declineDisclaimer()">
+                Decline
+            </button>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 Terra V. All rights reserved. - parts of content made with generative AI
+        </div>
+    </main>
+
+    <script>
+        function acceptDisclaimer() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get("id");
+            sessionStorage.setItem("diclaimer", "true");
+            window.location.href = "/news/read/?id=" + encodeURIComponent(id);
+        }
+
+        function declineDisclaimer() {
+            window.location.href = "/";
+        }
+
+        if(sessionStorage.getItem("diclaimer") === "true"){
+            acceptDisclaimer();
+        }
+    </script>
+
+</body>
+</html>

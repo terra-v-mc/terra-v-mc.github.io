@@ -55,7 +55,7 @@ const newspaperDisplay = document.getElementById("newspaperDisplay");
 news.forEach((article, index) => {
 
     const newspaper = document.createElement("a");
-    newspaper.href = "./read/?id=" + article.id;
+    newspaper.href = "./check.html?id=" + article.id;
     newspaper.className = `newspaper paper-${index + 1}`;
 
     newspaper.innerHTML = `
