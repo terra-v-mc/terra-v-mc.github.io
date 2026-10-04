@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraV News - Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            color: #222;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 35px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: 0;
+            border-radius: 7px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            min-height: 20px;
+        }
+
+        .signup {
+            margin-top: 25px;
+            text-align: center;
+            color: #666;
+        }
+
+        a {
+            color: #222;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Login</h1>
+
+    <form id="loginForm">
+        <label for="name">Username</label>
+
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your username"
+            required
+        >
+
+        <label for="password">Password</label>
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
+
+        <button type="submit">Log In</button>
+    </form>
+
+    <div id="message" class="message"></div>
+
+    <div class="signup">
+        No account?
+        <a href="./signup.html">Sign up</a>
+    </div>
+</div>
+
+<script>
+const API = "https://terrav-news.99-megatonne-fusswurzel.workers.dev";
+const form = document.getElementById("loginForm");
+const message = document.getElementById("message");
+
+form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const password = document.getElementById("password").value;
+
+    message.textContent = "Logging in...";
+
+    try {
+        const response = await fetch(`${API}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name,
+                password
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            message.textContent = data.error || "Login failed.";
+            return;
+        }
+
+        localStorage.setItem("username", name);
+
+        if (data.token) {
+            localStorage.setItem("token", data.token);
+        }
+
+        window.location.href = "./index.html";
+    } catch (error) {
+        console.error(error);
+        message.textContent = "Unable to connect to the server.";
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraV News - Sign Up</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #222;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 35px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: 0;
+            border-radius: 7px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            min-height: 20px;
+        }
+
+        .login {
+            margin-top: 25px;
+            text-align: center;
+            color: #666;
+        }
+
+        a {
+            color: #222;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Create Account</h1>
+    
+    <form id="signupForm">
+        <label for="name">Username</label>
+
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Choose a username"
+            required
+            minlength="3"
+        >
+
+        <label for="password">Password</label>
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Choose a password"
+            required
+            minlength="6"
+        >
+
+        <label for="passwordConfirm">Confirm Password</label>
+
+        <input
+            type="password"
+            id="passwordConfirm"
+            name="passwordConfirm"
+            placeholder="Repeat your password"
+            required
+            minlength="6"
+        >
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <div id="message" class="message"></div>
+
+    <div class="login">
+        <a href="./login.html">Log in</a>
+    </div>
+</div>
+
+<script>
+const API = "https://terrav-news.99-megatonne-fusswurzel.workers.dev";
+const form = document.getElementById("signupForm");
+const message = document.getElementById("message");
+
+form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const password = document.getElementById("password").value;
+    const passwordConfirm = document.getElementById("passwordConfirm").value;
+
+    if (password !== passwordConfirm) {
+        message.textContent = "Passwords do not match.";
+        return;
+    }
+
+    message.textContent = "Creating account...";
+
+    try {
+        const response = await fetch(`${API}/signup`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name,
+                password
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            message.textContent = data.error || "Signup failed.";
+            return;
+        }
+
+        window.location.href = "./login.html";
+    } catch (error) {
+        console.error(error);
+        message.textContent = "Unable to connect to the server.";
+    }
+});
+</script>
+
+</body>
+</html>

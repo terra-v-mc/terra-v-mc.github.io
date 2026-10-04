@@ -354,3 +354,17 @@ footer {
 .logo:hover {
     transform: scale(1.08);
 }
+
+.login-link {
+    color: #000000;
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    z-index: 100;
+    display: block;
+    border-color: #000000;
+    border-radius: 5%;
+    border-width: 2px;
+    border-style: solid;
+}
