@@ -12,7 +12,15 @@
     <a href="../" class="logo-link">
         <img src="../src/img/kebabcrafttext.png" alt="TerraV Logo" class="logo">
     </a>
-    <a href="./login.html" class="login-link">Reporter login</a>
+    <a href="./login.html" class="login-link" id="login-link">
+        reporter login
+        <script>
+            if (localStorage.getItem("username")) {
+                document.getElementById("login-link").innerHTML = "dashboard"
+                document.getElementById("login-link").setAttribute("href", "./dashboard")
+            }
+        </script>
+    </a>
     <header class="sign">
         <h1>TerraV News</h1>
         <small>THE WORLD • THE NEWS</small>
