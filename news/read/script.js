@@ -149,7 +149,17 @@ async function loadNewspaper() {
     }
 }
 
+function check() {
+    if (sessionStorage.getItem("diclaimer") === "true") {
+        loadNewspaper();
+    } else {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        window.location.href = "/news/check.html?id=" + encodeURIComponent(id);
+    }
+}
+
 document.addEventListener(
     "DOMContentLoaded",
-    loadNewspaper
+    check
 );
