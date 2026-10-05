@@ -617,3 +617,410 @@ footer {
   margin: 2rem auto;               /* spacing above and below */
   display: block;                  /* centers with margin auto */
 }
+
+
+/* ================= SPACE / FUTURE REDESIGN ================= */
+:root {
+  --bg-color:#03050d;
+  --text-color:#e8f5ff;
+  --navbar-bg:rgba(3,7,18,.82);
+  --nav-link-color:#c9dcf0;
+  --nav-link-hover:#55e7ff;
+  --btn-bg:#55e7ff;
+  --btn-color:#031018;
+  --features-bg:#050916;
+  --feature-card-bg:rgba(10,20,38,.72);
+  --footer-bg:#02040a;
+  --footer-color:#71849a;
+  --ip-bg:#050a15;
+  --ip-border:#18354e;
+  --ip-heading:#55e7ff;
+  --code-bg:#07121f;
+  --code-color:#7dffcf;
+  --ip-text:#a5b9cc;
+  --a-color:#55e7ff;
+  --hero-color:#eafaff;
+}
+body {
+  font-family: Inter, Bahnschrift, system-ui, sans-serif;
+  background: var(--bg-color);
+  letter-spacing:.015em;
+}
+.navbar {
+  position:relative; z-index:20;
+  background:var(--navbar-bg);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(90,210,255,.13);
+  box-shadow:0 8px 30px rgba(0,0,0,.28);
+}
+.nav-links a { text-transform:uppercase; font-size:.78rem; letter-spacing:.12em; }
+.nav-links a:hover { text-shadow:0 0 14px rgba(85,231,255,.8); }
+.hero {
+  height:calc(100vh - 76px);
+  min-height:650px;
+  background: var(--bg-color);
+  isolation:isolate;
+}
+#sky { cursor:grab; }
+#sky:active { cursor:grabbing; }
+.hero::after {
+  content:"";
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(1,4,12,.72) 0%,rgba(1,4,12,.12) 42%,rgba(1,4,12,.28) 100%),
+    linear-gradient(0deg,rgba(1,4,12,.6),transparent 30%,transparent 70%,rgba(1,4,12,.35));
+}
+.hero-hud {
+  position:absolute; inset:0; z-index:3;
+  pointer-events:none;
+}
+.hero-title {
+  position:absolute; left:6.5%; top:50%;
+  transform:translateY(-50%);
+  width:min(44vw,620px);
+  text-align:left;
+  pointer-events:auto;
+}
+.hero-title .eyebrow {
+  color:#65e9ff; font-size:.72rem; letter-spacing:.25em;
+  margin-bottom:1.2rem; opacity:.9;
+}
+.hero-title h1 { margin:0 0 1rem; }
+.hero-title h1 img { width:min(360px,65%); filter:drop-shadow(0 0 24px rgba(62,220,255,.22)); }
+.hero-title p {
+  margin:0; color:#b7cce0; font-size:clamp(1rem,1.5vw,1.25rem);
+  max-width:510px; line-height:1.7;
+}
+.btn {
+  border-radius:3px; padding:.9rem 1.35rem; text-transform:uppercase;
+  letter-spacing:.12em; font-size:.75rem;
+  box-shadow:0 0 25px rgba(85,231,255,.2);
+  border:1px solid rgba(255,255,255,.35);
+}
+.btn span { margin-left:.5rem; }
+.server-dock {
+  position:absolute; right:4%; top:50%; transform:translateY(-50%);
+  width:min(330px,25vw); min-width:260px;
+  padding:1.15rem;
+  background:var(--feature-card-bg);
+  border:1px solid rgba(85,231,255,.25);
+  border-radius:8px;
+  box-shadow:0 18px 60px rgba(0,0,0,.45), inset 0 1px rgba(255,255,255,.06);
+  backdrop-filter:blur(18px);
+  pointer-events:auto;
+}
+.dock-label,.server-dock span,.dock-footer {
+  color:var(--footer-color); font-size:.65rem; letter-spacing:.17em;
+}
+.dock-label { display:flex; align-items:center; gap:.55rem; }
+.status-dot { width:7px; height:7px; border-radius:50%; background:#e8a83e; box-shadow:0 0 10px #e8a83e; }
+.status-dot.online { background:#48ffb0; box-shadow:0 0 12px #48ffb0; }
+.status-dot.offline { background:#ff5572; box-shadow:0 0 12px #ff5572; }
+.status-state { margin:.8rem 0 1.2rem; color:#e8f8ff; font-size:.82rem; font-weight:700; }
+.status-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-bottom:1rem; }
+.status-grid > div {
+  background:color-mix(in srgb, var(--feature-card-bg) 70%, transparent); padding:.75rem;
+  border:1px solid rgba(100,180,220,.08);
+}
+.server-dock strong { display:block; margin-top:.3rem; color:#eefaff; font-size:.95rem; }
+.server-ip-row {
+  display:flex; align-items:end; justify-content:space-between; gap:.8rem;
+  padding-top:.8rem; border-top:1px solid rgba(100,180,220,.1);
+}
+.server-ip-row code { display:block; margin-top:.35rem; color:#70ffcc; font-size:.8rem; }
+.copy-ip,.planet-controls button {
+  background:rgba(85,231,255,.08); color:#65e9ff;
+  border:1px solid rgba(85,231,255,.3); border-radius:3px;
+  padding:.65rem .75rem; cursor:pointer; font-size:.62rem;
+  letter-spacing:.12em; font-weight:800;
+}
+.copy-ip:hover,.planet-controls button:hover { background:rgba(85,231,255,.17); }
+.dock-footer { margin-top:1rem; opacity:.65; }
+.planet-controls {
+  position:absolute; left:6.5%; bottom:2.5rem; z-index:4;
+  pointer-events:auto;
+}
+.planet-controls button { backdrop-filter:blur(12px); }
+.texture-panel {
+  display:none; margin-top:.55rem; width:250px; padding:1rem;
+  background:var(--feature-card-bg); border:1px solid rgba(85,231,255,.22);
+  border-radius:6px; backdrop-filter:blur(18px);
+}
+.texture-panel.open { display:grid; gap:.7rem; }
+.texture-panel label { color:#b5cadb; font-size:.7rem; letter-spacing:.05em; }
+.texture-panel input { display:block; width:100%; margin-top:.3rem; font-size:.62rem; color:#88a0b6; }
+.texture-panel small { color:#668095; line-height:1.4; }
+.panorama-meta {
+  position:absolute; right:4%; bottom:2.5rem; z-index:4;
+  display:flex; gap:1rem; align-items:center; color:#6f879d;
+  font-size:.6rem; letter-spacing:.16em;
+}
+.panorama-meta strong { color:#cceeff; font-size:.72rem; }
+.features,.updates,.ip-section { border-top:1px solid rgba(85,231,255,.08); }
+.feature-card,.update-card {
+  border:1px solid rgba(100,180,220,.1);
+  box-shadow:inset 0 1px rgba(255,255,255,.03),0 15px 40px rgba(0,0,0,.18);
+}
+@media (max-width:900px) {
+  .hero-title { left:5%; width:52%; }
+  .server-dock { right:3%; width:250px; min-width:0; }
+  .panorama-meta { display:none; }
+}
+@media (max-width:700px) {
+  .hero { min-height:760px; height:calc(100vh - 130px); }
+  .hero-title { left:1.2rem; top:34%; width:calc(100% - 2.4rem); }
+  .hero-title h1 img { width:220px; }
+  .hero-title p { font-size:.9rem; max-width:330px; }
+  .server-dock { left:1.2rem; right:1.2rem; top:auto; bottom:5.5rem; transform:none; width:auto; }
+  .planet-controls { left:1.2rem; bottom:1rem; }
+  .texture-panel { width:calc(100vw - 3rem); max-width:300px; }
+}
+
+/* --- Planetary panorama / theme corrections --- */
+:root {
+  --cyan-button-bg: rgba(85,231,255,.08);
+  --cyan-button-hover: rgba(85,231,255,.17);
+  --cyan-button-text: #65e9ff;
+  --cyan-button-border: rgba(85,231,255,.3);
+}
+
+/* Header bars always follow the active theme. */
+.navbar {
+  background: var(--navbar-bg) !important;
+  color: var(--nav-link-color);
+}
+body.light .navbar {
+  background: var(--navbar-bg) !important;
+  border-bottom-color: rgba(10,35,55,.14);
+  box-shadow: 0 8px 30px rgba(20,35,50,.12);
+}
+body.light .navbar .nav-links a { color: var(--nav-link-color); }
+
+/* Cyan HUD buttons are deliberately theme-independent. */
+.btn,
+.copy-ip,
+.planet-controls button,
+#toggle-texture-panel {
+  background: var(--cyan-button-bg) !important;
+  color: var(--cyan-button-text) !important;
+  border-color: var(--cyan-button-border) !important;
+  filter: none !important;
+}
+.btn:hover,
+.copy-ip:hover,
+.planet-controls button:hover,
+#toggle-texture-panel:hover {
+  background: var(--cyan-button-hover) !important;
+}
+
+/* Keep panorama content above the WebGL canvas and its decorative veil. */
+.hero-content,
+.hero-hud,
+.shared-panorama-hud {
+  z-index: 3;
+}
+.hero-content {
+  position: absolute;
+  left: 6.5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(44vw, 620px);
+  text-align: left;
+  pointer-events: auto;
+  color: var(--hero-color);
+  text-shadow: 0 0 2rem #000, 0 0 1rem #000;
+}
+.hero-content h1:first-child { margin: 0 0 1rem; }
+.hero-content h1 img { width: min(360px,65%); filter: drop-shadow(0 0 24px rgba(62,220,255,.22)); }
+
+/* All panorama pages get a consistent right-side status overlay. */
+.shared-panorama-hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.shared-panorama-hud .server-dock { pointer-events: auto; }
+
+@media (max-width: 900px) {
+  .hero-content { left: 5%; width: 52%; }
+}
+@media (max-width: 700px) {
+  .hero-content {
+    left: 1.2rem;
+    top: 34%;
+    width: calc(100% - 2.4rem);
+  }
+  .hero-content h1 img { width: 220px; }
+}
+
+/* Final theme behavior: the navigation/header follows the theme, while cyan HUD
+   buttons remain intentionally cyan in both modes. */
+:root {
+  --navbar-bg: rgba(2,5,13,.88);
+  --nav-link-color: #c9dcf0;
+  --nav-link-hover: #55e7ff;
+  --page-header-bg: rgba(5,9,22,.92);
+}
+body.light {
+  --bg-color: #f4f8fc;
+  --text-color: #101a24;
+  --navbar-bg: rgba(238,245,251,.94);
+  --nav-link-color: #172638;
+  --nav-link-hover: #087f9b;
+  --features-bg: #e9f0f5;
+  --feature-card-bg: #f8fbfd;
+  --footer-bg: #e5edf3;
+  --footer-color: #516273;
+  --ip-bg: #f1f6f9;
+  --ip-border: #c5d5df;
+  --ip-heading: #087f9b;
+  --code-bg: #e4edf2;
+  --ip-text: #334657;
+  --a-color: #087f9b;
+  --page-header-bg: rgba(232,240,246,.96);
+}
+body.light .navbar,
+body.light .page-header {
+  background: var(--navbar-bg) !important;
+  color: var(--nav-link-color);
+  border-color: rgba(23,38,56,.16) !important;
+  box-shadow: 0 8px 30px rgba(30,50,70,.12);
+}
+body.light .navbar .nav-links a { color: var(--nav-link-color); }
+body.light .navbar .nav-links a:hover { color: var(--nav-link-hover); }
+body.light .theme-toggle { color: var(--nav-link-color); }
+
+/* HUD buttons never inherit/invert the light/dark palette. */
+.btn,
+.copy-ip,
+.planet-controls button,
+#toggle-texture-panel {
+  background: var(--cyan-button-bg) !important;
+  color: var(--cyan-button-text) !important;
+  border-color: var(--cyan-button-border) !important;
+  filter: none !important;
+}
+.btn:hover,
+.copy-ip:hover,
+.planet-controls button:hover,
+#toggle-texture-panel:hover {
+  background: var(--cyan-button-hover) !important;
+  color: var(--cyan-button-text) !important;
+}
+
+/* Consistent panorama HUD positioning on every page. */
+.hero-hud.shared-panorama-hud { position:absolute; inset:0; z-index:3; pointer-events:none; }
+.hero-hud.shared-panorama-hud .hero-title { pointer-events:auto; }
+.hero-hud.shared-panorama-hud .server-dock { pointer-events:auto; }
+.hero-title { left:5%; width:min(42vw,560px); }
+@media (max-width:900px) {
+  .hero-title { left:4%; width:50%; }
+}
+@media (max-width:700px) {
+  .hero-title { left:1.2rem; width:calc(100% - 2.4rem); }
+}
+
+/* Theme-safe surfaces: no fixed black UI should survive the light theme. */
+:root {
+  --surface-1: #07101b;
+  --surface-2: #0b1623;
+  --surface-3: #101c29;
+  --surface-border: rgba(100,180,220,.14);
+  --header-bar-bg: rgba(2,5,13,.92);
+  --header-bar-border: rgba(90,210,255,.16);
+}
+body.light {
+  --surface-1: #f7fafc;
+  --surface-2: #edf3f7;
+  --surface-3: #e3ebf0;
+  --surface-border: rgba(23,38,56,.14);
+  --header-bar-bg: rgba(242,247,250,.96);
+  --header-bar-border: rgba(23,38,56,.16);
+}
+header,
+.navbar,
+.page-header,
+footer,
+.features,
+.ip-section,
+.updates,
+.feature-card,
+.update-card,
+.rules,
+.server-info,
+.card,
+.modal,
+.dropdown,
+.table-wrap {
+  border-color: var(--surface-border);
+}
+header,
+.navbar,
+.page-header {
+  background: var(--header-bar-bg) !important;
+  color: var(--nav-link-color) !important;
+}
+body.light header,
+body.light .navbar,
+body.light .page-header {
+  background: var(--header-bar-bg) !important;
+  color: var(--nav-link-color) !important;
+  border-bottom-color: var(--header-bar-border) !important;
+}
+body.light .features,
+body.light .updates,
+body.light .ip-section,
+body.light .rules,
+body.light .feature-card,
+body.light .update-card {
+  background-color: var(--features-bg) !important;
+  color: var(--text-color) !important;
+}
+body.light footer {
+  background: var(--footer-bg) !important;
+  color: var(--footer-color) !important;
+}
+body.light input,
+body.light textarea,
+body.light select,
+body.light .server-dock,
+body.light .texture-panel {
+  background-color: var(--surface-2);
+  color: var(--text-color);
+}
+
+/* Cyan controls stay cyan in both themes. */
+.btn,
+.copy-ip,
+.planet-controls button,
+#toggle-texture-panel {
+  background: var(--cyan-button-bg) !important;
+  color: var(--cyan-button-text) !important;
+  border-color: var(--cyan-button-border) !important;
+  filter: none !important;
+}
+.texture-panel, #toggle-texture-panel, .planet-controls { display:none !important; }
+
+
+body.light {
+  --bg-color:#f4f8fb;
+  --text-color:#10202d;
+  --navbar-bg:rgba(240,246,251,.92);
+  --nav-link-color:#163246;
+  --nav-link-hover:#007f9f;
+  --features-bg:#eaf1f5;
+  --feature-card-bg:rgba(255,255,255,.82);
+  --footer-bg:#e2ebf0;
+  --footer-color:#536b7a;
+  --ip-bg:#f7fafc;
+  --ip-border:#b8cbd6;
+  --ip-text:#27404f;
+  --code-bg:#e8f0f4;
+}
+body.light .hero::after {
+  background:linear-gradient(90deg,rgba(235,244,250,.48) 0%,rgba(235,244,250,.05) 42%,rgba(235,244,250,.16) 100%),linear-gradient(0deg,rgba(235,244,250,.24),transparent 30%,transparent 70%,rgba(235,244,250,.16));
+}
+body.light .hero-title p { color:#274555; }
+body.light .server-dock { background:linear-gradient(145deg,rgba(245,250,253,.9),rgba(226,238,245,.86)); box-shadow:0 18px 60px rgba(30,70,90,.18),inset 0 1px rgba(255,255,255,.75); }
+body.light .dock-label, body.light .server-dock span, body.light .dock-footer { color:#557080; }
+body.light .status-grid > div { background:rgba(20,70,95,.035); }

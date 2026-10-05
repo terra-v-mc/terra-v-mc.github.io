@@ -27,13 +27,31 @@
     </header>
 
     <main id="main">
-        <section class="hero">
+        <section class="hero" aria-label="Terra V planetary panorama">
   <canvas id="sky"></canvas>
-  <div class="hero-content">
-    <h1><img src="./src/img/kebabcrafttext.png" alt="Terra V"></h1>
-    <h1>The ultimate Earth SMP Minecraft experience.</h1>
-    <a href="join.html" class="btn">Join Now</a>
+
+  <div class="hero-hud">
+    <div class="hero-title">
+        <h1><img src="./src/img/kebabcrafttext.png" alt="Terra V"></h1>
+      <p>The ultimate Earth SMP Minecraft experience.</p>
+      <a href="join.html" class="btn">Join Now <span>↗</span></a>
+    </div>
+
+    <aside class="server-dock" aria-label="Server status">
+      <div class="dock-label"><span class="status-dot" id="server-status-dot"></span> SERVER STATUS</div>
+      <div class="status-state" id="server-status-text">Checking connection…</div>
+      <div class="status-grid">
+        <div><span>VERSION</span><strong id="server-version">1.21.11+</strong></div>
+        <div><span>ONLINE PLAYERS</span><strong id="server-players">—</strong></div>
+      </div>
+      <div class="server-ip-row">
+        <div><span>SERVER IP</span><code id="server-ip">play.kebabcraft.net</code></div>
+        <button class="copy-ip" id="copy-ip" type="button">COPY IP</button>
+      </div>
+      <div class="dock-footer">JAVA / BEDROCK · 19132</div>
+    </aside>
   </div>
+
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
