@@ -61,61 +61,36 @@
         <script>
         // Default-Skin
         const defaultSkin = "https://api.mineatar.io/body/full/aab62631839344588fee11c4414cee48?scale=16";
-        const teamData = {
-            "Tulajdonosok": [
-                { "name": "Stormtrooper1948", "rank": "Tulajdonos", "skin": "https://api.mineatar.io/body/full/d86f01025aaa48609a4a51c79bb3d56a?scale=16" },
-                { "name": "aGalacticTrooper", "rank": "Társtulajdonos", "skin": "https://api.mineatar.io/body/full/2ace8091-3e7a-4895-ba04-c78bbda0034c?scale=16"}
-            ],
-            "Tiszteletbeli említések": [
-                { "name": "Gorm", "rank": "Fejlesztő és szponzor", "skin": "https://api.mineatar.io/body/full/370d475d-8a9d-4403-9615-3cf9639bf1dd?scale=16"}
-            ],
-            "Fejlesztés": [
-                { "name": "ThePhoenix49", "rank": "Vezető fejlesztő", "skin": "https://api.mineatar.io/body/full/b355822753bc4c8590fa157c60442bcc?scale=16" },
-                { "name": "CyberH3ad", "rank": "Fejlesztő", "skin": "https://api.mineatar.io/body/full/4b6e8b01-6db1-4de7-b08f-ea6e30a8f8ce?scale=16" },                
-                { "name": "Pope l0playz", "rank": "Fejlesztő", "skin": "https://api.mineatar.io/body/full/c0a42c3b-bcde-4fdd-9a7f-fe684ceadcbd?scale=16"},                
-                { "name": "SCIRY_", "rank": "Fejlesztő", "skin": "https://api.mineatar.io/body/full/d2a92343-20fd-493b-8b58-017c6e64c087?scale=16"},                
-                { "name": "TLine dev", "rank": "Fejlesztő", "skin": "https://api.mineatar.io/body/full/990f8f7a-05b9-4bb7-af86-5167cb20f117?scale=16"},                
-                { "name": "no name", "rank": "Webfejlesztő", "skin": "https://api.mineatar.io/body/full/4d6263ab-9579-4666-b13d-83cc9644f783?scale=16"},                
-                { "name": "Azo", "rank": "Próba fejlesztő", "skin": "https://api.mineatar.io/body/full/de858727-881e-4fe5-8a4b-1a1cc42e83f3?scale=16"}
-            ],
-            "Adminisztráció": [
-                { "name": "Bigdogchampski", "rank": "Vezető admin", "skin": "https://api.mineatar.io/body/full/9e017a0d-84bb-4ba3-bda7-ad3973c04803?scale=16"},          
-                { "name": "basharion", "rank": "Admin", "skin": "https://api.mineatar.io/body/full/dc0745f6-8aaf-464a-b105-db4746944adf?scale=16"},                
-                { "name": "PatrickTNT", "rank": "Admin", "skin": "https://api.mineatar.io/body/full/666b1ca7-fc0a-4e31-ba5a-bd07f48a7003?scale=16"},                
-                { "name": "dreammycreamyx", "rank": "Admin", "skin": "https://api.mineatar.io/body/full/c4de7848-6bfa-4257-93f8-1fab2a82902f?scale=16"}
-            ],
-            "Moderáció": [
-            { "name": "Doctro_k", "rank": "Vezető moderátor", "skin": "https://api.mineatar.io/body/full/51f691da-e72b-4bd3-aedf-bb3bd6024c8c?scale=16"},                
-            { "name": "Anführer Carterprogamer", "rank": "Moderátor", "skin": "https://api.mineatar.io/body/full/44e46f69-2647-4d36-b3f6-e71678fb42b3?scale=16"},                
-            { "name": "Arei", "rank": "Moderátor", "skin": "https://api.mineatar.io/body/full/962facd9-1eb4-486a-9f99-f5b71077c82e?scale=16"},                
-            { "name": "FootballFan9973", "rank": "Moderátor", "skin": "https://api.mineatar.io/body/full/a3dc5096-7d53-41c0-add7-e25587c050a9?scale=16"}
-            ],
-            "Építők": [
-            { "name": "Sinine", "rank": "Vezető építő", "skin": "https://api.mineatar.io/body/full/f4f50bda-6ae8-4696-97dd-0ad6fecf0054?scale=16"},                
-            { "name": "cabybara", "rank": "Építő", "skin": "https://api.mineatar.io/body/full/1f7434a8-be97-47c3-af1d-5439e9a269e8?scale=16"}
-            ]
-        };
-        const container = document.getElementById('team-container');
-        for (const [category, members] of Object.entries(teamData)) {
-            const catDiv = document.createElement('div');
-            const h2Class = category === 'Tiszteletbeli említések' ? 'honorable-mentions' : '';
-            catDiv.innerHTML = `<h2 class="${h2Class}">${category}</h2><ul></ul>`;
-            const ul = catDiv.querySelector('ul');
+        let teamData;
+        async function loadTeamData() {
+            const response = await fetch("../src/db/people.json");
+            teamData = await response.json();
+            render();
+        }
+        loadTeamData();
+        function render() {
+            const container = document.getElementById('team-container');
+            for (const [category, members] of Object.entries(teamData)) {
+                const catDiv = document.createElement('div');
+                const h2Class = category === 'Honorable Mentions' ? 'honorable-mentions' : '';
+                catDiv.innerHTML = `<h2 class="${h2Class}">${category}</h2><ul></ul>`;
+                const ul = catDiv.querySelector('ul');
 
-            members.forEach(member => {
-                const li = document.createElement('li');
-                const skinUrl = member.skin || defaultSkin; 
-                li.innerHTML = `
-                    <div class="dev-card">
-                        <img class="skin" src="${skinUrl}" alt="${member.name}">
-                        <h3>${member.name}</h3>
-                        <p class="rank">${member.rank}</p>
-                    </div>
-                `;
-                ul.appendChild(li);
-            });
+                members.forEach(member => {
+                    const li = document.createElement('li');
+                    const skinUrl = member.skin || defaultSkin; 
+                    li.innerHTML = `
+                        <div class="dev-card">
+                            <img class="skin" src="${skinUrl}" alt="${member.name}">
+                            <h3>${member.name}</h3>
+                            <p class="rank">${member.rank}</p>
+                        </div>
+                    `;
+                    ul.appendChild(li);
+                });
 
-            container.appendChild(catDiv);
+                container.appendChild(catDiv);
+            }
         }
         </script>
     </main>

@@ -1,0 +1,26 @@
+{
+    "Owners": [
+        { "name": "Stormtrooper1948", "rank": "Owner", "skin": "https://api.mineatar.io/body/full/d86f01025aaa48609a4a51c79bb3d56a?scale=16" },
+        { "name": "Wounder of U", "rank": "Co-Owner", "skin": "https://api.mineatar.io/body/full/e32f813a-6bc5-4801-83bf-af43778538b7?scale=16"}
+    ],
+    "Development": [
+        { "name": "ThePhoenix49", "rank": "Head Dev", "skin": "https://api.mineatar.io/body/full/b355822753bc4c8590fa157c60442bcc?scale=16" },              
+        { "name": "no name", "rank": "Web-Developer", "skin": "https://api.mineatar.io/body/full/4d6263ab-9579-4666-b13d-83cc9644f783?scale=16"},
+        { "name": "FriskyGuy", "rank": "Art & Developer", "skin": "https://api.mineatar.io/body/full/194e3f0f-69df-466f-82b4-7bfd44600313?scale=16"},
+        { "name": "cyproheptadine", "rank": "Trial Dev", "skin": "https://api.mineatar.io/body/full/4a407a80-3596-4cf8-aef4-81fca5bb4816?scale=16"},
+        { "name": "xrz", "rank": "Dev", "skin": "https://api.mineatar.io/body/full/5946044b-28e6-490b-b74a-cb8cabf999c0?scale=16"}                
+    ],
+    "Administration": [
+        { "name": "Doctro_k", "rank": "Head Admin", "skin": "https://api.mineatar.io/body/full/51f691da-e72b-4bd3-aedf-bb3bd6024c8c?scale=16"},        
+        { "name": "King Of Everestia", "rank": "Admin"}
+    ],
+    "Moderation": [
+                        
+        { "name": "TSK", "rank": "Moderator", "skin": "https://api.mineatar.io/body/full/15e06ef7-efca-4326-85e9-a68275e867aa?scale=16"},
+        { "name": "Bigdogchampski", "rank": "Moderator", "skin": "https://api.mineatar.io/body/full/9e017a0d-84bb-4ba3-bda7-ad3973c04803?scale=16"},  
+        { "name": "PatrickTNT", "rank": "Admin", "skin": "https://api.mineatar.io/body/full/666b1ca7-fc0a-4e31-ba5a-bd07f48a7003?scale=16"}                 
+    ],
+    "Builder": [
+        { "name": "Sinine", "rank": "Head Builder", "skin": "https://api.mineatar.io/body/full/f4f50bda-6ae8-4696-97dd-0ad6fecf0054?scale=16"}
+    ]
+}
