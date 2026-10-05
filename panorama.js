@@ -1,3 +1,4 @@
+
 window.addEventListener("DOMContentLoaded", function () {
 
     var canvas = document.getElementById("sky");
@@ -92,6 +93,19 @@ window.addEventListener("DOMContentLoaded", function () {
             "./textures/normal.jpg"
         );
 
+    // Cloud texture.
+    // PNG is recommended because it supports transparency.
+    var cloudTexture =
+        textureLoader.load(
+            "./textures/clouds.png"
+        );
+
+    // Cloud height/displacement texture.
+    var cloudDisplacementTexture =
+        textureLoader.load(
+            "./textures/clouds-displacement.jpg"
+        );
+
     skyTexture.colorSpace =
         THREE.SRGBColorSpace;
 
@@ -99,6 +113,12 @@ window.addEventListener("DOMContentLoaded", function () {
         THREE.SRGBColorSpace;
 
     normalTexture.colorSpace =
+        THREE.NoColorSpace;
+
+    cloudTexture.colorSpace =
+        THREE.SRGBColorSpace;
+
+    cloudDisplacementTexture.colorSpace =
         THREE.NoColorSpace;
 
 
@@ -127,11 +147,11 @@ window.addEventListener("DOMContentLoaded", function () {
     // ============================================================
 
     var sunDirection =
-    new THREE.Vector3(
-        8,
-        1.25,
-        -9
-    ).normalize();
+        new THREE.Vector3(
+            8,
+            1.25,
+            -9
+        ).normalize();
 
 
     var hemisphereLight =
@@ -165,118 +185,116 @@ window.addEventListener("DOMContentLoaded", function () {
     );
 
 
+    // ============================================================
+    // SUN
+    // ============================================================
+
+    var sunPosition =
+        sunDirection.clone().multiplyScalar(55);
 
 
+    // ------------------------------------------------------------
+    // WARM SUN FLARE
+    // ------------------------------------------------------------
 
- // ============================================================
- // SUN
- // ============================================================
+    var flareCanvas =
+        document.createElement("canvas");
 
- var sunPosition =
-     sunDirection.clone().multiplyScalar(55);
+    flareCanvas.width = 128;
+    flareCanvas.height = 128;
 
+    var flareContext =
+        flareCanvas.getContext("2d");
 
- // ------------------------------------------------------------
- // WARM SUN FLARE
- // ------------------------------------------------------------
+    var gradient =
+        flareContext.createRadialGradient(
+            64,
+            64,
+            0,
+            64,
+            64,
+            64
+        );
 
- var flareCanvas =
-     document.createElement("canvas");
+    gradient.addColorStop(
+        0.0,
+        "rgba(255,245,225,1)"
+    );
 
- flareCanvas.width = 128;
- flareCanvas.height = 128;
+    gradient.addColorStop(
+        0.10,
+        "rgba(255,210,165,0.98)"
+    );
 
- var flareContext =
-     flareCanvas.getContext("2d");
+    gradient.addColorStop(
+        0.25,
+        "rgba(255,145,75,0.75)"
+    );
 
- var gradient =
-     flareContext.createRadialGradient(
-         64,
-         64,
-         0,
-         64,
-         64,
-         64
-     );
+    gradient.addColorStop(
+        0.45,
+        "rgba(245,100,45,0.38)"
+    );
 
- gradient.addColorStop(
-     0.0,
-     "rgba(255,245,225,1)"
- );
+    gradient.addColorStop(
+        0.70,
+        "rgba(220,75,35,0.14)"
+    );
 
- gradient.addColorStop(
-     0.10,
-     "rgba(255,210,165,0.98)"
- );
+    gradient.addColorStop(
+        1.0,
+        "rgba(190,60,30,0)"
+    );
 
- gradient.addColorStop(
-     0.25,
-     "rgba(255,145,75,0.75)"
- );
+    flareContext.fillStyle =
+        gradient;
 
- gradient.addColorStop(
-     0.45,
-     "rgba(245,100,45,0.38)"
- );
+    flareContext.fillRect(
+        0,
+        0,
+        128,
+        128
+    );
 
- gradient.addColorStop(
-     0.70,
-     "rgba(220,75,35,0.14)"
- );
+    var flareTexture =
+        new THREE.CanvasTexture(
+            flareCanvas
+        );
 
- gradient.addColorStop(
-     1.0,
-     "rgba(190,60,30,0)"
- );
+    flareTexture.colorSpace =
+        THREE.SRGBColorSpace;
 
- flareContext.fillStyle =
-     gradient;
+    var flareMaterial =
+        new THREE.SpriteMaterial({
+            map: flareTexture,
+            transparent: true,
+            depthWrite: false,
+            depthTest: false,
+            blending: THREE.AdditiveBlending,
+            opacity: 0.85
+        });
 
- flareContext.fillRect(
-     0,
-     0,
-     128,
-     128
- );
+    var sunFlare =
+        new THREE.Sprite(
+            flareMaterial
+        );
 
- var flareTexture =
-     new THREE.CanvasTexture(
-         flareCanvas
-     );
+    sunFlare.position.copy(
+        sunPosition
+    );
 
- flareTexture.colorSpace =
-     THREE.SRGBColorSpace;
+    sunFlare.scale.set(
+        7,
+        7,
+        1
+    );
 
- var flareMaterial =
-     new THREE.SpriteMaterial({
-         map: flareTexture,
-         transparent: true,
-         depthWrite: false,
-         depthTest: false,
-         blending: THREE.AdditiveBlending,
-         opacity: 0.85
-     });
+    sunFlare.renderOrder = 5;
 
- var sunFlare =
-     new THREE.Sprite(
-         flareMaterial
-     );
+    scene.add(
+        sunFlare
+    );
 
- sunFlare.position.copy(
-     sunPosition
- );
-
- sunFlare.scale.set(
-     7,
-     7,
-     1
- );
-
- sunFlare.renderOrder = 5;
-
- scene.add(
-     sunFlare
- );
 
     // ============================================================
     // EARTH
@@ -314,6 +332,75 @@ window.addEventListener("DOMContentLoaded", function () {
 
     scene.add(
         earth
+    );
+
+
+    // ============================================================
+    // CLOUD LAYER
+    //
+    // Very slightly above Earth's surface.
+    //
+    // Uses:
+    // - PBR shading
+    // - Cloud albedo
+    // - Alpha transparency
+    // - Displacement map
+    //
+    // The displacement is deliberately subtle.
+    // ============================================================
+
+    var clouds = new THREE.Mesh(
+
+        new THREE.SphereGeometry(
+            1.015,
+            64,
+            48
+        ),
+
+        new THREE.MeshStandardMaterial({
+
+            map:
+                cloudTexture,
+
+            displacementMap:
+                cloudDisplacementTexture,
+
+            displacementScale:
+                0.008,
+
+            displacementBias:
+                0,
+
+            roughness:
+                0.9,
+
+            metalness:
+                0,
+
+            transparent:
+                true,
+
+            alphaTest:
+                0.02,
+
+            depthWrite:
+                true
+
+        })
+    );
+
+
+    clouds.position.copy(
+        earth.position
+    );
+
+    clouds.rotation.z =
+        earth.rotation.z;
+
+    clouds.renderOrder = 2;
+
+    scene.add(
+        clouds
     );
 
 
@@ -558,9 +645,6 @@ window.addEventListener("DOMContentLoaded", function () {
 
                     // ------------------------------------------------
                     // DENSITY
-                    //
-                    // Dense near Earth.
-                    // Smoothly fades toward space.
                     // ------------------------------------------------
 
                     "float density = " +
@@ -716,7 +800,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
     // ============================================================
-    // EARTH ROTATION
+    // EARTH + CLOUD ROTATION
     // ============================================================
 
     var rotationDuration =
@@ -777,11 +861,17 @@ window.addEventListener("DOMContentLoaded", function () {
             (time - startTime) %
             rotationDuration;
 
-        earth.rotation.y =
+        var rotation =
             (elapsed /
                 rotationDuration) *
             Math.PI *
             2;
+
+        earth.rotation.y =
+            rotation;
+
+        clouds.rotation.y =
+            rotation;
 
         renderer.render(
             scene,
