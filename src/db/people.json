@@ -1,14 +1,14 @@
 {
     "Owners": [
         { "name": "Stormtrooper1948", "rank": "Owner", "skin": "https://api.mineatar.io/body/full/d86f01025aaa48609a4a51c79bb3d56a?scale=16" },
-        { "name": "Wounder of U", "rank": "Co-Owner", "skin": "https://api.mineatar.io/body/full/e32f813a-6bc5-4801-83bf-af43778538b7?scale=16"}
+        { "name": "Wonder of U", "rank": "Co-Owner", "skin": "https://api.mineatar.io/body/full/2ace8091-3e7a-4895-ba04-c78bbda0034c?scale=16"}
     ],
     "Development": [
         { "name": "ThePhoenix49", "rank": "Head Dev", "skin": "https://api.mineatar.io/body/full/b355822753bc4c8590fa157c60442bcc?scale=16" },              
         { "name": "no name", "rank": "Web-Developer", "skin": "https://api.mineatar.io/body/full/4d6263ab-9579-4666-b13d-83cc9644f783?scale=16"},
-        { "name": "FriskyGuy", "rank": "Art & Developer", "skin": "https://api.mineatar.io/body/full/194e3f0f-69df-466f-82b4-7bfd44600313?scale=16"},
-        { "name": "cyproheptadine", "rank": "Trial Dev", "skin": "https://api.mineatar.io/body/full/4a407a80-3596-4cf8-aef4-81fca5bb4816?scale=16"},
-        { "name": "xrz", "rank": "Dev", "skin": "https://api.mineatar.io/body/full/5946044b-28e6-490b-b74a-cb8cabf999c0?scale=16"}                
+        { "name": "FriskyGuy", "rank": "Art & Developer", "skin": "https://api.mineatar.io/body/full/4b6e8b01-6db1-4de7-b08f-ea6e30a8f8ce?scale=16"},
+        { "name": "cyproheptadine", "rank": "Trial Dev"},
+        { "name": "xrz", "rank": "Dev", "skin": "https://api.mineatar.io/body/full/bf53fe01-c359-4a49-9245-73da05e7d1a8?scale=16"}                
     ],
     "Moderation": [
         { "name": "Doctro_k", "rank": "Head Moderator", "skin": "https://api.mineatar.io/body/full/51f691da-e72b-4bd3-aedf-bb3bd6024c8c?scale=16"},        
