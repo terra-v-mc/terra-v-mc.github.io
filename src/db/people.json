@@ -1,6 +1,7 @@
 {
     "Owners": [
-        { "name": "Stormtrooper1948", "rank": "Owner", "skin": "https://api.mineatar.io/body/full/d86f01025aaa48609a4a51c79bb3d56a?scale=16" },
+        { "name": "TSK", "rank": "Temporary Owner", "skin": "https://api.mineatar.io/body/full/15e06ef7-efca-4326-85e9-a68275e867aa?scale=16"},
+        { "name": "Stormtrooper1948", "rank": "Temporarily stepped down as Owner", "skin": "https://api.mineatar.io/body/full/d86f01025aaa48609a4a51c79bb3d56a?scale=16" },
         { "name": "Wonder of U", "rank": "Co-Owner", "skin": "https://api.mineatar.io/body/full/2ace8091-3e7a-4895-ba04-c78bbda0034c?scale=16"}
     ],
     "Development": [
@@ -10,14 +11,13 @@
         { "name": "cyproheptadine", "rank": "Trial Dev"},
         { "name": "xrz", "rank": "Dev", "skin": "https://api.mineatar.io/body/full/bf53fe01-c359-4a49-9245-73da05e7d1a8?scale=16"}                
     ],
+    "Administration": [
+        { "name": "Bigdogchampski", "rank": "Temporary Head Admin", "skin": "https://api.mineatar.io/body/full/9e017a0d-84bb-4ba3-bda7-ad3973c04803?scale=16"},  
+        { "name": "PatrickTNT", "rank": "Admin", "skin": "https://api.mineatar.io/body/full/666b1ca7-fc0a-4e31-ba5a-bd07f48a7003?scale=16"}                 
+    ],
     "Moderation": [
         { "name": "Doctro_k", "rank": "Head Moderator", "skin": "https://api.mineatar.io/body/full/51f691da-e72b-4bd3-aedf-bb3bd6024c8c?scale=16"},        
         { "name": "King Of Everestia", "rank": "Moderator"}
-    ],
-    "Administration": [
-        { "name": "TSK", "rank": "Head Admin", "skin": "https://api.mineatar.io/body/full/15e06ef7-efca-4326-85e9-a68275e867aa?scale=16"},
-        { "name": "Bigdogchampski", "rank": "Admin", "skin": "https://api.mineatar.io/body/full/9e017a0d-84bb-4ba3-bda7-ad3973c04803?scale=16"},  
-        { "name": "PatrickTNT", "rank": "Admin", "skin": "https://api.mineatar.io/body/full/666b1ca7-fc0a-4e31-ba5a-bd07f48a7003?scale=16"}                 
     ],
     "Builder": [
         { "name": "Sinine", "rank": "Head Builder", "skin": "https://api.mineatar.io/body/full/f4f50bda-6ae8-4696-97dd-0ad6fecf0054?scale=16"}
