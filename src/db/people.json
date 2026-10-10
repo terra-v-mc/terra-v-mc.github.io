@@ -20,6 +20,7 @@
         { "name": "King Of Everestia", "rank": "Moderator"}
     ],
     "Builder": [
-        { "name": "Sinine", "rank": "Head Builder", "skin": "https://api.mineatar.io/body/full/f4f50bda-6ae8-4696-97dd-0ad6fecf0054?scale=16"}
+        { "name": "Sinine", "rank": "Head Builder", "skin": "https://api.mineatar.io/body/full/f4f50bda-6ae8-4696-97dd-0ad6fecf0054?scale=16"},
+        { "name": "Kaiffy", "rank": "Builder", "skin": "https://api.mineatar.io/body/full/0a26f78c-1281-4fc6-9b3a-e70bf53a4198?scale=16"}
     ]
 }
